@@ -9,83 +9,94 @@ class SalesPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () async {
-              final DateTime? dateTime = await showDatePicker(
-                context: context,
-                locale: const Locale("es"),
-                firstDate: DateTime(2024),
-                lastDate: DateTime(2024, 12, 31),
-              );
+      body: Padding(
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            OutlinedButton.icon(
+              icon: const Icon(Icons.date_range),
+              onPressed: () async {
+                final DateTime? dateTime = await showDatePicker(
+                  context: context,
+                  locale: const Locale("es"),
+                  firstDate: DateTime(2024),
+                  lastDate: DateTime(2024, 12, 31),
+                );
 
-              if (dateTime != null) {
-                print(DateFormat("dd/MM/yyyy").format(dateTime));
-              }
-            },
-            child: const Text("Filtrar por fecha"),
-          ),
-          SizedBox(
-            width: width,
-            child: DataTable(
-              columns: const [
-                DataColumn(
-                  label: Center(
-                    child: Text("Id"),
-                  ),
+                if (dateTime != null) {
+                  print(DateFormat("dd/MM/yyyy").format(dateTime));
+                }
+              },
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8), // Bordes rectos
                 ),
-                DataColumn(
-                  label: Center(
-                    child: Text("Fecha"),
-                  ),
-                ),
-                DataColumn(
-                  label: Center(
-                    child: Text("Subtotal"),
-                  ),
-                ),
-                DataColumn(
-                  label: Center(
-                    child: Text("IVA"),
-                  ),
-                ),
-                DataColumn(
-                  label: Center(
-                    child: Text("Total"),
-                  ),
-                ),
-              ],
-              rows: [
-                DataRow(
-                  onLongPress: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => _CustomDialog(),
-                    );
-                  },
-                  cells: const [
-                    DataCell(
-                      Text("1"),
-                    ),
-                    DataCell(
-                      Text("09/11/2024"),
-                    ),
-                    DataCell(
-                      Text("200"),
-                    ),
-                    DataCell(
-                      Text("32"),
-                    ),
-                    DataCell(
-                      Text("232"),
-                    ),
-                  ],
-                )
-              ],
+              ),
+              label: const Text("Filtrar"),
             ),
-          ),
-        ],
+            const SizedBox(width: 20),
+            SizedBox(
+              width: width,
+              child: DataTable(
+                columns: const [
+                  DataColumn(
+                    label: Center(
+                      child: Text("Id"),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Center(
+                      child: Text("Fecha"),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Center(
+                      child: Text("Subtotal"),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Center(
+                      child: Text("IVA"),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Center(
+                      child: Text("Total"),
+                    ),
+                  ),
+                ],
+                rows: [
+                  DataRow(
+                    onLongPress: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => _CustomDialog(),
+                      );
+                    },
+                    cells: const [
+                      DataCell(
+                        Text("1"),
+                      ),
+                      DataCell(
+                        Text("09/11/2024"),
+                      ),
+                      DataCell(
+                        Text("200"),
+                      ),
+                      DataCell(
+                        Text("32"),
+                      ),
+                      DataCell(
+                        Text("232"),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
