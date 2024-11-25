@@ -17,7 +17,6 @@ class MainPage extends ConsumerWidget {
       body: Row(
         children: [
           NavigationRail(
-            leading: const Icon(Icons.settings),
             extended: true,
             onDestinationSelected: (int index) {
               ref.read(screensProvider.notifier).changeScreen(index);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tienda/ui/components/dotted_line.dart';
 
 class PosPage extends StatelessWidget {
@@ -15,7 +16,15 @@ class PosPage extends StatelessWidget {
         children: [
           SizedBox(
             width: size.width / 2,
-            child: const TextField(),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Buscar",
+                suffixIcon: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.search),
+                ),
+              ),
+            ),
           ),
           const SizedBox(height: 40),
           Row(
@@ -31,7 +40,7 @@ class PosPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                height: (size.height / 3) * 2,
+                height: (size.height / 3) * 2.5,
                 width: size.width / 2,
                 child: ListView.builder(
                   itemCount: 20,
@@ -60,16 +69,16 @@ class PosPage extends StatelessWidget {
                 height: size.height / 1.5,
                 child: Column(
                   children: [
-                    ListTile(
-                      title: const Text("Subtotal"),
+                    const ListTile(
+                      title: Text("Subtotal"),
                       trailing: Text(
                         "\$106.50",
                         style: priceStyle,
                       ),
                     ),
-                    ListTile(
-                      title: const Text("IVA"),
-                      subtitle: const Text(
+                    const ListTile(
+                      title: Text("IVA"),
+                      subtitle: Text(
                         "16%",
                         style: TextStyle(fontSize: 12),
                       ),
@@ -78,8 +87,8 @@ class PosPage extends StatelessWidget {
                         style: priceStyle,
                       ),
                     ),
-                    ListTile(
-                      title: const Text("Subtotal"),
+                    const ListTile(
+                      title: Text("Subtotal"),
                       trailing: Text(
                         "\$106.50",
                         style: priceStyle,
@@ -89,14 +98,14 @@ class PosPage extends StatelessWidget {
                       padding: EdgeInsets.only(left: 10),
                       child: DottedLine(),
                     ),
-                    ListTile(
-                      title: const Text("Total"),
+                    const ListTile(
+                      title: Text("Total"),
                       trailing: Text(
                         "\$123.55",
                         style: priceStyle,
                       ),
                     ),
-                    SizedBox(
+                    Flexible(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,7 +123,7 @@ class PosPage extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: Colors.black,
-                                    width: 3.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
@@ -122,15 +131,24 @@ class PosPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 100,
                             height: 100,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: const EdgeInsets.only(top: 20),
                               child: Column(
                                 children: [
-                                  TextField(),
-                                  Text("Cambio: \$0.00"),
+                                  TextField(
+                                    decoration: const InputDecoration(
+                                        hintText: "\$0.00"),
+                                    textAlign: TextAlign.end,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d*\.?\d*'))
+                                    ],
+                                  ),
+                                  const Text("Cambio: \$0.00"),
                                 ],
                               ),
                             ),
